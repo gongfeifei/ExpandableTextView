@@ -8,6 +8,7 @@ import android.text.style.ImageSpan;
 import android.view.View;
 
 /**
+ * ClickableImageSpan 继承自 ImageSpan，使其能响应点击事件，并图片垂直居中显示
  * Created by lenovo on 2017/3/7.
  */
 public abstract class ClickableImageSpan extends ImageSpan{

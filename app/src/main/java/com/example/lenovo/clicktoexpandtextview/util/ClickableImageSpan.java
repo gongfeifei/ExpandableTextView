@@ -1,4 +1,4 @@
-package com.example.lenovo.clicktoexpandtextview;
+package com.example.lenovo.clicktoexpandtextview.util;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

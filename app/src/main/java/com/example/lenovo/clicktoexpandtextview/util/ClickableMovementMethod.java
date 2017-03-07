@@ -1,4 +1,4 @@
-package com.example.lenovo.clicktoexpandtextview;
+package com.example.lenovo.clicktoexpandtextview.util;
 
 import android.text.Layout;
 import android.text.Selection;

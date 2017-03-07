@@ -1,11 +1,15 @@
 package com.example.lenovo.clicktoexpandtextview;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
@@ -55,5 +59,39 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // 显示收缩状态的文本，设置点击图标，并添加点击事件
+    private static void openFun(final TextView tv,final CharSequence ellipsizeStr,final String desc){
+        CharSequence temp = ellipsizeStr+".";
+        SpannableStringBuilder ssb = new SpannableStringBuilder(temp);
+        Drawable dd = tv.getResources().getDrawable(R.drawable.ic_expand);
+        dd.setBounds(0, 0, dd.getIntrinsicWidth(), dd.getIntrinsicHeight());
+        ClickableImageSpan is = new ClickableImageSpan(dd) {
+            @Override
+            public void onClick(View view) {
+                closeFun(tv,ellipsizeStr,desc);
+            }
+
+        };
+        ssb.setSpan(is, temp.length()-1, temp.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        tv.setText(ssb);
+        tv.setMovementMethod(ClickableMovementMethod.getInstance());
+    }
+
+    // 显示展开状态的文本，设置点击图标，并添加点击事件
+    private static void closeFun(final TextView tv,final CharSequence ellipsizeStr,final String desc) {
+        SpannableStringBuilder ssb = new SpannableStringBuilder(desc);
+        Drawable dd = tv.getResources().getDrawable(R.drawable.ic_normal);
+        dd.setBounds(0, 0, dd.getIntrinsicWidth(), dd.getIntrinsicHeight());
+        ClickableImageSpan is = new ClickableImageSpan(dd) {
+            @Override
+            public void onClick(View view) {
+                openFun(tv,ellipsizeStr,desc);
+            }
+        };
+        ssb.setSpan(is, desc.length()-1, desc.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        tv.setText(ssb);
+        tv.setMovementMethod(ClickableMovementMethod.getInstance());
     }
 }
